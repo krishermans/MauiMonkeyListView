@@ -1,24 +1,21 @@
-﻿namespace MauiMonkeyListView;
+﻿using MauiMonkeyListView.ViewModel;
+
+namespace MauiMonkeyListView;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	private MainPageViewModel _viewModel;
 
 	public MainPage()
 	{
 		InitializeComponent();
+		_viewModel = new MainPageViewModel();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	protected override void OnAppearing()
 	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
+		base.OnAppearing();
+		_viewModel.OnAppearing();
 	}
 }
 
